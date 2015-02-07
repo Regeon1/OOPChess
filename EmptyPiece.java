@@ -12,6 +12,6 @@ public class EmptyPiece extends Piece{
     }
     
     public String toString(){
-        return "E";
+        return " ";
     }
 }

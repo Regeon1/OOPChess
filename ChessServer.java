@@ -9,6 +9,7 @@ public class ChessServer {
         Scanner in = new Scanner(System.in);
         Game g = new Game();
         
+        g.draw();
         while(true){
             String cmd = in.nextLine();
             String[] a = cmd.split(" ");

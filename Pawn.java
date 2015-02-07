@@ -18,7 +18,7 @@ public class Pawn extends Piece{
                 return true;
             //Attack moves
             if(to.y == from.y + 1 && Math.abs(to.x - from.x) == 1 && 
-                    board[to.x][to.y].color == Color.BLACK)
+                    board[to.x][to.y].getColor() == Color.BLACK)
                 return true;
         }else if(color == Color.BLACK){
             //Normal move forward
@@ -29,7 +29,7 @@ public class Pawn extends Piece{
                 return true;
             //Attack moves
             if(to.y == from.y - 1 && Math.abs(to.x - from.x) == 1 && 
-                    board[to.x][to.y].color == Color.WHITE)
+                    board[to.x][to.y].getColor() == Color.WHITE)
                 return true;
         }
         return false;

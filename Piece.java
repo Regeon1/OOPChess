@@ -3,9 +3,13 @@
 
 
 abstract class Piece implements PieceColor{
-    Color color;
+    protected final Color color;
     abstract Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board);
     Piece(Color color){
         this.color = color;
+    }
+    
+    Color getColor(){
+        return color;
     }
 }
