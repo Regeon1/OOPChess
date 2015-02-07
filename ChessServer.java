@@ -14,13 +14,16 @@ public class ChessServer {
             String cmd = in.nextLine();
             String[] a = cmd.split(" ");
             if(a[0].equals("move")){
-                g.movePiece(new Vector2(Integer.parseInt(a[1]), Integer.parseInt(a[2])),
-                        new Vector2(Integer.parseInt(a[3]), Integer.parseInt(a[4])));
+                g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
             }else if(a[0].equals("exit")){
                 return;
             }
             g.draw();
         }
+    }
+    
+    public static Vector2 convertCMDcoordinates(String cmd){
+        return new Vector2(Integer.parseInt(cmd.substring(1))-1, ((int)cmd.charAt(0))-65);
     }
  
 }

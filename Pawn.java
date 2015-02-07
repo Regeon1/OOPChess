@@ -11,7 +11,7 @@ public class Pawn extends Piece{
     Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){
         if(color == Color.WHITE){
             //Normal move forward
-            if(to.y == from.y + 1 && to.x == from.x)
+            if(to.y == from.y + 1 && to.x == from.x && board[to.x][to.y].getColor() == Color.EMPTY)
                 return true;
             //2 forward from start position
             if(to.y == from.y + 2 && to.x == from.x && from.y == 1)

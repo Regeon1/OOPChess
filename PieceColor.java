@@ -6,5 +6,5 @@
  * @author juhis
  */
 public interface PieceColor {
-    enum Color{WHITE, BLACK};
+    enum Color{EMPTY, WHITE, BLACK};
 }
