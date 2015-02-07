@@ -7,7 +7,7 @@ public class EmptyPiece extends Piece{
         super(Color.WHITE);
     }
     
-    Boolean checkMove(Vector2 to, Piece[][] b){
+    Boolean checkMove(Vector2 from, Vector2 to, Piece[][] b){
         return false; //Can't move empty piece
     }
     

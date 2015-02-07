@@ -1,6 +1,3 @@
-
-import java.util.Scanner;
-
  //* This program is free software; you can redistribute it and/or
 //* modify it under the terms of the GNU General Public License 2
 
@@ -16,6 +13,7 @@ public class Game implements PieceColor{
             }
         }
         board[1][0] = new Pawn(Color.WHITE);
+        board[0][3] = new Pawn(Color.BLACK);
     }
     
     public void draw(){
@@ -29,7 +27,7 @@ public class Game implements PieceColor{
     
     public Boolean movePiece(Vector2 from, Vector2 to){
         //Check wheter the move is valid
-        if(board[from.x][from.y].checkMove(to, board)){
+        if(board[from.x][from.y].checkMove(from, to, board)){
             //Attack?
             //Move
             board[to.x][to.y] = board[from.x][from.y];
