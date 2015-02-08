@@ -59,6 +59,8 @@ public class Game implements PieceColor{
             //Move
             board[to.x][to.y] = board[from.x][from.y];
             board[from.x][from.y] = new EmptyPiece();
+        }else{
+            System.out.println("Error: Illegal move!");
         }
         return false;
     }

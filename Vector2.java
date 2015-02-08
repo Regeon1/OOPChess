@@ -24,4 +24,12 @@ public class Vector2 {
         this.x -= v.x;
         this.y -= v.y;
     }
+    
+    public static int length(Vector2 v){
+        return Math.abs(v.x - v.y);
+    }
+    
+    public static int sign(Vector2 v){
+        return (v.x-v.y)/length(v);
+    }
 }

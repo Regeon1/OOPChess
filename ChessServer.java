@@ -23,7 +23,11 @@ public class ChessServer {
     }
     
     public static Vector2 convertCMDcoordinates(String cmd){
-        return new Vector2(Integer.parseInt(cmd.substring(1))-1, ((int)cmd.charAt(0))-65);
+        char letter = cmd.charAt(0);
+        if(letter > 73){
+            letter = Character.toUpperCase(letter);
+        }
+        return new Vector2(((int)letter)-65, Integer.parseInt(cmd.substring(1))-1);
     }
  
 }
