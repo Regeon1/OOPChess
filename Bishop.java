@@ -8,8 +8,21 @@ public class Bishop extends Piece{
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){
-        // Add something here ?
-    	// Test commit
+        //Check wheter there is own piece at the target square
+        if(board[to.x][to.y].getColor() == board[from.x][from.y].getColor())
+            return false;
+        //Check that the move is diagonal
+        if(Vector2.length(new Vector2(from.x, to.x)) == 
+                Vector2.length(new Vector2(from.y, to.y))){
+            //Check that there isn't any pieces on the path
+            for(int i = 1; i < Vector2.length(new Vector2(from.y, to.y)); i++){
+                if(board[from.x - i*Vector2.sign(new Vector2(from.x, to.x))]
+                        [from.y - i*Vector2.sign(new Vector2(from.y, to.y))]
+                        .getColor() != Color.EMPTY)
+                    return false;
+            }
+            return true;
+        }
         return false;
     }
     
