@@ -9,6 +9,7 @@ public class Bishop extends Piece{
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){
         // Add something here ?
+    	// Test commit
         return false;
     }
     
