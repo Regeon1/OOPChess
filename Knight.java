@@ -25,8 +25,8 @@ public class Knight extends Piece{
     
     public String toString(){
         if(color == Color.WHITE) //Capital letters for white pieces
-            return "H";
+            return "C";
         else
-            return "h";
+            return "c";
     }
 }
