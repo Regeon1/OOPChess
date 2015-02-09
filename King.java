@@ -9,8 +9,9 @@ public class King extends Piece{
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){
-        // Add something here ?
-        return false;
+        return Vector2.length(new Vector2(from.x, to.x)) <= 1 && 
+                Vector2.length(new Vector2(from.y, to.y)) <= 1 &&
+                board[to.x][to.y].getColor() != board[from.x][from.y].getColor();
     }
     
     public String toString(){

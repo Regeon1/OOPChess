@@ -8,7 +8,18 @@ public class Knight extends Piece{
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){
-        // Add something here ?
+        // 2 vertical and 1 horizontal
+        if(Vector2.length(new Vector2(from.x, to.x)) == 2 && 
+                Vector2.length(new Vector2(from.y, to.y)) == 1 &&
+                board[to.x][to.y].getColor() != board[from.x][from.y].getColor()){
+            return true;
+        }
+        // 2 horizontal and 1 vertical
+        else if(Vector2.length(new Vector2(from.x, to.x)) == 1 && 
+                Vector2.length(new Vector2(from.y, to.y)) == 2 &&
+                board[to.x][to.y].getColor() != board[from.x][from.y].getColor()){
+            return true;
+        }
         return false;
     }
     
