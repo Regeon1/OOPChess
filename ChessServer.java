@@ -13,7 +13,7 @@ public class ChessServer {
         while(true){
             String cmd = in.nextLine();
             String[] a = cmd.split(" ");
-            if(a[0].equals("move")){
+            if((a[0].equals("move") || a[0].equals("mv")) && a.length == 3){
                 g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
             }else if(a[0].equals("exit")){
                 return;

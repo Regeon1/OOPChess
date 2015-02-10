@@ -54,6 +54,10 @@ public class Game implements PieceColor{
     
     public Boolean movePiece(Vector2 from, Vector2 to){
         //Check wheter the move is valid
+        if(0 > from.x || from.x > 7 || 0 > from.y || from.y > 7 ||
+                0 > to.x || to.x > 7 || 0 > to.y || to.y > 7 )
+            return false;
+        //Check wheter the move is legal
         if(board[from.x][from.y].checkMove(from, to, board)){
             //Attack?
             //Move
