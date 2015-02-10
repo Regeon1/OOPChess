@@ -12,7 +12,22 @@ public class Queen extends Piece{
             return false;
         //Check wheter the move is vertical or horizontal
         //Same function is in rooks file: if you find bug, fix both
-
+        if(from.x == to.x && from.y != to.y){
+            for(int i = from.y + Vector2.sign(new Vector2(to.y, from.y));
+                    Math.abs(i-to.y) > 0 ; i += Vector2.sign(new Vector2(to.y, from.y))){
+                if(board[to.x][i].getColor() != Color.EMPTY)
+                    return false;
+            }
+            return true;
+        }
+        if(from.y == to.y && from.x != to.x){
+            for(int i = from.x + Vector2.sign(new Vector2(to.x, from.x));
+                    Math.abs(i-to.x) > 0 ; i += + Vector2.sign(new Vector2(to.x, from.x))){
+                if(board[i][to.y].getColor() != Color.EMPTY)
+                    return false;
+            }
+            return true;
+        }
         //Check if move is diagonal
         //Same function is in bishops file: if you find bug, fix both
         if(Vector2.length(new Vector2(from.x, to.x)) == 
