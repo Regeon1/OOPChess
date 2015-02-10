@@ -53,7 +53,6 @@ public class Game implements PieceColor{
     }
     
     public Boolean movePiece(Vector2 from, Vector2 to){
-        //Check wheter the move is valid
         if(board[from.x][from.y].checkMove(from, to, board)){
             //Attack?
             //Move
