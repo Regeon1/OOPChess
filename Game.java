@@ -61,6 +61,7 @@ public class Game implements PieceColor{
 
         if(board[from.x][from.y].checkMove(from, to, board)){
             //Attack?
+        	//Test commit
             //Move
             board[to.x][to.y] = board[from.x][from.y];
             board[from.x][from.y] = new EmptyPiece();
