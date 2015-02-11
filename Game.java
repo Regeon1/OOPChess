@@ -1,10 +1,13 @@
  //* This program is free software; you can redistribute it and/or
 //* modify it under the terms of the GNU General Public License 2
-
+import java.util.ArrayList;
 
 public class Game implements PieceColor{
 
     Piece[][] board = new Piece[8][8];
+    ArrayList<Piece> lostWhite = new ArrayList<Piece>();
+    ArrayList<Piece> lostBlack = new ArrayList<Piece>();
+
     
     public Game(){
         //Initialize the board
@@ -60,8 +63,14 @@ public class Game implements PieceColor{
         //Check wheter the move is legal
 
         if(board[from.x][from.y].checkMove(from, to, board)){
-            //Attack?
-        	//Test commit
+            //Attack
+        	if(board[to.x][to.y].getColor()==Color.WHITE){
+        		lostWhite.add(board[to.x][to.y]);
+        	}
+        	if(board[to.x][to.y].getColor()==Color.BLACK){
+        		lostBlack.add(board[to.x][to.y]);
+        	}
+        	
             //Move
             board[to.x][to.y] = board[from.x][from.y];
             board[from.x][from.y] = new EmptyPiece();
