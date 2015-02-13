@@ -16,10 +16,11 @@ public class Game implements PieceProperties{
             String[] a = cmd.split(" ");
             if((a[0].equals("move") || a[0].equals("mv")) && a.length == 3){
                 g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
+            }else if(a[0].equals("flip")){
+                flip = !flip;
             }else if(a[0].equals("exit")){
                 return;
             }
-            flip = !flip;
             draw(flip);
         }
     }
@@ -40,7 +41,7 @@ public class Game implements PieceProperties{
         System.out.println("___________________________");
         System.out.println("");
         //Print pieces and boards sides
-        for(int y = flip ? 7 : 0;  (flip ? y >= 0 : y <= 7); y += flip ? -1 : 1){
+        for(int y = flip ? 0 : 7;  (flip ? y <= 7 : y >= 0); y += flip ? 1 : -1){
             System.out.print((y+1) + "| "); // Letters to the left side
             for(int x = flip ? 7 : 0;  (flip ? x >= 0 : x <= 7); x += flip ? -1 : 1){
                 System.out.print("["+g.getGameState().board[x][y]+"]");

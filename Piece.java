@@ -5,8 +5,11 @@
 abstract class Piece implements PieceProperties{
     protected final Color color;
     protected final Type type;
+    Boolean moved;
+    
     abstract Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board);
     Piece(Type type, Color color){
+        moved = false;
         this.type = type;
         this.color = color;
     }
@@ -17,5 +20,9 @@ abstract class Piece implements PieceProperties{
     
     Type getType(){
         return type;
+    }
+    
+    Boolean isMoved(){
+        return moved;
     }
 }
