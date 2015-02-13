@@ -9,8 +9,8 @@ public class Game implements PieceProperties{
     
     public Game() {
         Scanner in = new Scanner(System.in);
-        
-        draw();
+        Boolean flip = true;
+        draw(flip);
         while(true){
             String cmd = in.nextLine();
             String[] a = cmd.split(" ");
@@ -19,7 +19,8 @@ public class Game implements PieceProperties{
             }else if(a[0].equals("exit")){
                 return;
             }
-            draw();
+            flip = !flip;
+            draw(flip);
         }
     }
     
@@ -31,21 +32,30 @@ public class Game implements PieceProperties{
         return new Vector2(((int)letter)-65, Integer.parseInt(cmd.substring(1))-1);
     }
     
-    public void draw(){
+    public void draw(Boolean flip){
         //Print top of the board
-        System.out.println("    A  B  C  D  E  F  G  H ");
+        String file = "A  B  C  D  E  F  G  H";
+        file = flip ? reverseString(file):file;
+        System.out.println("    " + file + " ");
         System.out.println("___________________________");
         System.out.println("");
         //Print pieces and boards sides
-        for(int y = 0; y <= 7; y++){
+        for(int y = flip ? 7 : 0;  (flip ? y >= 0 : y <= 7); y += flip ? -1 : 1){
             System.out.print((y+1) + "| "); // Letters to the left side
-            for(int x = 0; x <= 7; x++){
+            for(int x = flip ? 7 : 0;  (flip ? x >= 0 : x <= 7); x += flip ? -1 : 1){
                 System.out.print("["+g.getGameState().board[x][y]+"]");
             }
             System.out.println(" |" + (y+1)); // and right side
         }
         //Print lower part of the board
         System.out.println("___________________________");
-        System.out.println("    A  B  C  D  E  F  G  H ");
+        System.out.println("    " + file + " ");
+    }
+    
+    private String reverseString(String str){
+        String tmp = "";
+        for(int i = str.length()-1; i >= 0; i--)
+            tmp += ""+str.charAt(i);
+        return tmp; 
     }
 }
