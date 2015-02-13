@@ -4,7 +4,7 @@
 
 public class EmptyPiece extends Piece{
     EmptyPiece(){
-        super(Color.EMPTY);
+        super(Type.EMPTY, Color.EMPTY);
     }
     
     Boolean checkMove(Vector2 from, Vector2 to, Piece[][] b){

@@ -5,7 +5,7 @@
 public class Pawn extends Piece{
     Pawn(Color color){
         //Set piece's color
-        super(color);
+        super(Type.PAWN, color);
     }
     //Check wheter the move is legal
     Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){

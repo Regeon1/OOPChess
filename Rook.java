@@ -4,7 +4,7 @@
 public class Rook extends Piece{
     Rook(Color color){
         //Set piece's color
-        super(color);
+        super(Type.ROOK, color);
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){

@@ -4,7 +4,7 @@
 public class Queen extends Piece{
     Queen(Color color){
         //Set piece's color
-        super(color);
+        super(Type.QUEEN, color);
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){

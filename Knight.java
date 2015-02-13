@@ -4,7 +4,7 @@
 public class Knight extends Piece{
     Knight(Color color){
         //Set piece's color
-        super(color);
+        super(Type.KNIGHT, color);
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){

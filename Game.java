@@ -1,40 +1,34 @@
  //* This program is free software; you can redistribute it and/or
 //* modify it under the terms of the GNU General Public License 2
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Game implements PieceColor{
+public class Game implements PieceProperties{
 
-    Piece[][] board = new Piece[8][8];
-    ArrayList<Piece> lostWhite = new ArrayList<Piece>();
-    ArrayList<Piece> lostBlack = new ArrayList<Piece>();
-
+    Gamemode g = new Versus();
     
-    public Game(){
-        //Initialize the board
-        for(int x = 0; x <= 7; x++){
-            for(int y = 2; y <= 5; y++){
-                board[x][y] = new EmptyPiece();
+    
+    public Game() {
+        Scanner in = new Scanner(System.in);
+        
+        draw();
+        while(true){
+            String cmd = in.nextLine();
+            String[] a = cmd.split(" ");
+            if((a[0].equals("move") || a[0].equals("mv")) && a.length == 3){
+                g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
+            }else if(a[0].equals("exit")){
+                return;
             }
+            draw();
         }
-        //Initialize pawns
-        for(int x = 0; x <= 7; x++){
-            board[x][1] = new Pawn(Color.WHITE);
-            board[x][6] = new Pawn(Color.BLACK);
+    }
+    
+    public static Vector2 convertCMDcoordinates(String cmd){
+        char letter = cmd.charAt(0);
+        if(letter > 73){
+            letter = Character.toUpperCase(letter);
         }
-        //Initialize other pieces
-        Color color = Color.WHITE;
-        for(int i = 0; i <= 7; i+=7){
-            board[0][i] = new Rook(color);
-            board[1][i] = new Knight(color);
-            board[2][i] = new Bishop(color);
-            board[3][i] = new Queen(color);
-            board[4][i] = new King(color);
-            board[5][i] = new Bishop(color);
-            board[6][i] = new Knight(color);
-            board[7][i] = new Rook(color);
-            color = Color.BLACK;
-        }
-
+        return new Vector2(((int)letter)-65, Integer.parseInt(cmd.substring(1))-1);
     }
     
     public void draw(){
@@ -46,37 +40,12 @@ public class Game implements PieceColor{
         for(int y = 0; y <= 7; y++){
             System.out.print((y+1) + "| "); // Letters to the left side
             for(int x = 0; x <= 7; x++){
-                System.out.print("["+board[x][y]+"]");
+                System.out.print("["+g.getGameState().board[x][y]+"]");
             }
             System.out.println(" |" + (y+1)); // and right side
         }
         //Print lower part of the board
         System.out.println("___________________________");
         System.out.println("    A  B  C  D  E  F  G  H ");
-    }
-    
-    public Boolean movePiece(Vector2 from, Vector2 to){
-        //Check wheter the move is valid
-        if(0 > from.x || from.x > 7 || 0 > from.y || from.y > 7 ||
-                0 > to.x || to.x > 7 || 0 > to.y || to.y > 7 )
-            return false;
-        //Check wheter the move is legal
-
-        if(board[from.x][from.y].checkMove(from, to, board)){
-            //Attack
-        	if(board[to.x][to.y].getColor()==Color.WHITE){
-        		lostWhite.add(board[to.x][to.y]);
-        	}
-        	if(board[to.x][to.y].getColor()==Color.BLACK){
-        		lostBlack.add(board[to.x][to.y]);
-        	}
-        	
-            //Move
-            board[to.x][to.y] = board[from.x][from.y];
-            board[from.x][from.y] = new EmptyPiece();
-        }else{
-            System.out.println("Error: Illegal move!");
-        }
-        return false;
     }
 }

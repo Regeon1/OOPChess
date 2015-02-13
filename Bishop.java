@@ -4,7 +4,7 @@
 public class Bishop extends Piece{
     Bishop(Color color){
         //Set piece's color
-        super(color);
+        super(Type.BISHOP, color);
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){

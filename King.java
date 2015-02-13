@@ -5,7 +5,7 @@ public class King extends Piece{
     
     King(Color color){
         //Set piece's color
-        super(color);
+        super(Type.KING, color);
     }
     
     public Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board){
