@@ -34,10 +34,23 @@ public class Game implements PieceProperties{
     }
     
     public void draw(Boolean flip){
+        //Prepare information
+        String [] info = new String[8];
+        
+        //Fix turn and lists when turn system is ready
+        info[0] = "  |Turn:" + flip;
+        info[1] = "  |You have captured:";
+        info[2] = "  |" + (flip ? g.getGameState().lostBlack : g.getGameState().lostWhite);
+        info[3] = "  |";
+        info[4] = "  |You have lost:";
+        info[5] = "  |" + (flip ? g.getGameState().lostWhite : g.getGameState().lostBlack);
+        info[6] = "  |";
+        info[7] = "  |Time left:";
+        
         //Print top of the board
-        String file = "A  B  C  D  E  F  G  H";
-        file = flip ? reverseString(file):file;
-        System.out.println("    " + file + " ");
+        String files = "A  B  C  D  E  F  G  H";
+        files = flip ? reverseString(files):files;
+        System.out.println("    " + files + " ");
         System.out.println("___________________________");
         System.out.println("");
         //Print pieces and boards sides
@@ -46,11 +59,12 @@ public class Game implements PieceProperties{
             for(int x = flip ? 7 : 0;  (flip ? x >= 0 : x <= 7); x += flip ? -1 : 1){
                 System.out.print("["+g.getGameState().board[x][y]+"]");
             }
-            System.out.println(" |" + (y+1)); // and right side
+            System.out.print(" |" + (y+1)); // and right side
+            System.out.println(info[flip ? y:7-y]);
         }
         //Print lower part of the board
         System.out.println("___________________________");
-        System.out.println("    " + file + " ");
+        System.out.println("    " + files + " ");
     }
     
     private String reverseString(String str){
