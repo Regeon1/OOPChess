@@ -5,7 +5,8 @@
 abstract class Piece implements PieceProperties{
     protected final Color color;
     protected final Type type;
-    Boolean moved;
+    Boolean moved; //This is used to chech castling move, only KING and ROOK
+                    //have this feature. If other pieces need this, add it.
     
     abstract Boolean checkMove(Vector2 from, Vector2 to, Piece[][] board);
     Piece(Type type, Color color){

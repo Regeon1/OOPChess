@@ -16,6 +16,7 @@ public class Rook extends Piece{
                 if(board[to.x][i].getColor() != Color.EMPTY)
                     return false;
             }
+            moved = true;
             return true;
         }
         if(from.y == to.y && from.x != to.x){
@@ -24,6 +25,7 @@ public class Rook extends Piece{
                 if(board[i][to.y].getColor() != Color.EMPTY)
                     return false;
             }
+            moved = true;
             return true;
         }
         return false;

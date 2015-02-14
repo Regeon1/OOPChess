@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 public abstract class Gamemode {
 
-    Piece[][] board = new Piece[8][8];
-    ArrayList<Piece> lostWhite = new ArrayList<Piece>();
-    ArrayList<Piece> lostBlack = new ArrayList<Piece>();
+    protected Piece[][] board = new Piece[8][8];
+    protected ArrayList<Piece> lostWhite = new ArrayList<>();
+    protected ArrayList<Piece> lostBlack = new ArrayList<>();
+    
+    protected PieceProperties.Color turn = PieceProperties.Color.WHITE;
     
     public abstract Boolean movePiece(Vector2 from, Vector2 to);
     
