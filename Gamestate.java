@@ -9,7 +9,7 @@ public class Gamestate implements PieceProperties{
     private final ArrayList<Piece> lostWhite;
     private final ArrayList<Piece> lostBlack;
     private final Color turn;
-    private final Vector2 promotion;
+    private final Vector2 promotion; //koordinates
     
     public Gamestate(Piece[][] board, ArrayList<Piece> lostWhite, 
             ArrayList<Piece> lostBlack, Color turn, Vector2 promotion){
