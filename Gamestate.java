@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Gamestate implements PieceProperties{
  
-    public Piece[][] board = new Piece[8][8];
-    public ArrayList<Piece> lostWhite = new ArrayList<Piece>();
-    public ArrayList<Piece> lostBlack = new ArrayList<Piece>();
-    public Color turn;
+    private final Piece[][] board;
+    private final ArrayList<Piece> lostWhite;
+    private final ArrayList<Piece> lostBlack;
+    private final Color turn;
 
     
     public Gamestate(Piece[][] board, ArrayList<Piece> lostWhite, 
@@ -18,4 +18,21 @@ public class Gamestate implements PieceProperties{
         this.lostBlack = lostBlack;
         this.turn = turn;
     }
+    
+    public Piece[][] getBoard(){
+        return board;
+    }
+    
+    public ArrayList<Piece> getLostWhite(){
+        return lostWhite;
+    }
+    
+    public ArrayList<Piece> getLostBlack(){
+        return lostBlack;
+    }
+    
+    public Color getTurn(){
+        return turn;
+    }
+    
 }

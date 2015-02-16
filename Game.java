@@ -6,7 +6,6 @@ public class Game implements PieceProperties{
 
     Gamemode g = new Versus();
     
-    
     public Game() {
         Scanner in = new Scanner(System.in);
         draw();
@@ -32,21 +31,18 @@ public class Game implements PieceProperties{
     
     public void draw(){
     	Boolean flip;
-    	if(g.getGameState().turn == Color.WHITE)
-    		flip = false;
-    	else
-    		flip=true;
+        flip = g.getGameState().getTurn() != Color.WHITE;
 
         //Prepare information
         String [] info = new String[8];
-        
+      
         //Fix turn and lists when turn system is ready
         info[0] = "  |Turn: " + (flip ? "Black": "White");
         info[1] = "  |You have captured:";
-        info[2] = "  |" + (flip ? g.getGameState().lostBlack : g.getGameState().lostWhite);
+        info[2] = "  |" + (flip ? g.getGameState().getLostWhite() : g.getGameState().getLostBlack());
         info[3] = "  |";
         info[4] = "  |You have lost:";
-        info[5] = "  |" + (flip ? g.getGameState().lostWhite : g.getGameState().lostBlack);
+        info[5] = "  |" + (flip ? g.getGameState().getLostBlack() : g.getGameState().getLostWhite());
         info[6] = "  |";
         info[7] = "  |Time left:";
         
@@ -60,7 +56,7 @@ public class Game implements PieceProperties{
         for(int y = flip ? 0 : 7;  (flip ? y <= 7 : y >= 0); y += flip ? 1 : -1){
             System.out.print((y+1) + "| "); // Letters to the left side
             for(int x = flip ? 7 : 0;  (flip ? x >= 0 : x <= 7); x += flip ? -1 : 1){
-                System.out.print("["+g.getGameState().board[x][y]+"]");
+                System.out.print("[" + g.getGameState().getBoard()[x][y] + "]");
             }
             System.out.print(" |" + (y+1)); // and right side
             System.out.println(info[flip ? y:7-y]);
