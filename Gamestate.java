@@ -9,14 +9,15 @@ public class Gamestate implements PieceProperties{
     private final ArrayList<Piece> lostWhite;
     private final ArrayList<Piece> lostBlack;
     private final Color turn;
-
+    private final Vector2 promotion;
     
     public Gamestate(Piece[][] board, ArrayList<Piece> lostWhite, 
-            ArrayList<Piece> lostBlack, Color turn){
+            ArrayList<Piece> lostBlack, Color turn, Vector2 promotion){
         this.board = board;
         this.lostWhite = lostWhite;
         this.lostBlack = lostBlack;
         this.turn = turn;
+        this.promotion = promotion;
     }
     
     public Piece[][] getBoard(){
@@ -33,6 +34,9 @@ public class Gamestate implements PieceProperties{
     
     public Color getTurn(){
         return turn;
+    }
+    public Vector2 getPromotion(){
+    	return promotion;
     }
     
 }

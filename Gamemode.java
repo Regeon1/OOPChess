@@ -9,8 +9,8 @@ public abstract class Gamemode implements PieceProperties{
     protected Piece[][] board = new Piece[8][8];
     protected ArrayList<Piece> lostWhite = new ArrayList<>();
     protected ArrayList<Piece> lostBlack = new ArrayList<>();
-    
     protected Color turn = Color.WHITE;
+    protected Vector2 promotion;
     
     public abstract Boolean movePiece(Vector2 from, Vector2 to)
             throws IllegalMoveException, FalseTurnException;
@@ -44,6 +44,6 @@ public abstract class Gamemode implements PieceProperties{
     
     public Gamestate getGameState(){
         //Possible bug: Arraylists may be modified later, be careful...
-        return new Gamestate(board.clone(), lostWhite, lostBlack, turn);
+        return new Gamestate(board.clone(), lostWhite, lostBlack, turn, promotion);
     } 
 }
