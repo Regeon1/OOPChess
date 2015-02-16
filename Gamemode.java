@@ -12,7 +12,8 @@ public abstract class Gamemode implements PieceProperties{
     
     protected Color turn = Color.WHITE;
     
-    public abstract Boolean movePiece(Vector2 from, Vector2 to);
+    public abstract Boolean movePiece(Vector2 from, Vector2 to)
+            throws IllegalMoveException, FalseTurnException;
     
     public Gamemode(){
         //Initialize the board

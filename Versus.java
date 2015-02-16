@@ -3,7 +3,8 @@
 
 public class Versus extends Gamemode implements PieceProperties{
     
-    public Boolean movePiece(Vector2 from, Vector2 to){
+    public Boolean movePiece(Vector2 from, Vector2 to) 
+            throws IllegalMoveException, FalseTurnException {
 
     	//Check wheter the move is valid
         if(0 > from.x || from.x > 7 || 0 > from.y || from.y > 7 ||
@@ -11,8 +12,7 @@ public class Versus extends Gamemode implements PieceProperties{
             return false;
         
         if(turn != board[from.x][from.y].getColor()){
-        	System.out.println("Error: False turn!");
-        	return false;
+        	throw(new FalseTurnException());
         }
         //Check wheter the move is legal
         if(board[from.x][from.y].checkMove(from, to, board)){
@@ -45,7 +45,7 @@ public class Versus extends Gamemode implements PieceProperties{
             }
 
         }else{
-        	System.out.println("Error: Illegal move!");
+        	throw(new IllegalMoveException());
         }
         return false;
     }

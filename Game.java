@@ -13,7 +13,13 @@ public class Game implements PieceProperties{
             String cmd = in.nextLine();
             String[] a = cmd.split(" ");
             if((a[0].equals("move") || a[0].equals("mv")) && a.length == 3){
-                g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
+                try{
+                    g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
+                }catch(IllegalMoveException ex){
+                    System.out.println("Error: Illegal move!");
+                }catch(FalseTurnException ex){
+                    System.out.println("Error: False turn!");
+                }
             }else if(a[0].equals("exit")){
                 return;
             }
@@ -21,7 +27,7 @@ public class Game implements PieceProperties{
         }
     }
     
-    public static Vector2 convertCMDcoordinates(String cmd){
+    private static Vector2 convertCMDcoordinates(String cmd){
         char letter = cmd.charAt(0);
         if(letter > 73){
             letter = Character.toUpperCase(letter);
@@ -29,7 +35,7 @@ public class Game implements PieceProperties{
         return new Vector2(((int)letter)-65, Integer.parseInt(cmd.substring(1))-1);
     }
     
-    public void draw(){
+    private void draw(){
     	Boolean flip;
         flip = g.getGameState().getTurn() != Color.WHITE;
 
