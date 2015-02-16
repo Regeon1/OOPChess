@@ -4,13 +4,13 @@
 
 import java.util.ArrayList;
 
-public abstract class Gamemode {
+public abstract class Gamemode implements PieceProperties{
 
     protected Piece[][] board = new Piece[8][8];
     protected ArrayList<Piece> lostWhite = new ArrayList<>();
     protected ArrayList<Piece> lostBlack = new ArrayList<>();
     
-    protected PieceProperties.Color turn = PieceProperties.Color.WHITE;
+    protected Color turn = Color.WHITE;
     
     public abstract Boolean movePiece(Vector2 from, Vector2 to);
     
@@ -43,6 +43,6 @@ public abstract class Gamemode {
     
     public Gamestate getGameState(){
         //Possible bug: Arraylists may be modified later, be careful...
-        return new Gamestate(board.clone(), lostWhite, lostBlack);
+        return new Gamestate(board.clone(), lostWhite, lostBlack, turn);
     } 
 }

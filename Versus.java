@@ -5,11 +5,15 @@ public class Versus extends Gamemode implements PieceProperties{
     
     public Boolean movePiece(Vector2 from, Vector2 to){
 
-        //Check wheter the move is valid
+    	//Check wheter the move is valid
         if(0 > from.x || from.x > 7 || 0 > from.y || from.y > 7 ||
                 0 > to.x || to.x > 7 || 0 > to.y || to.y > 7 )
             return false;
-            
+        
+        if(turn != board[from.x][from.y].getColor()){
+        	System.out.println("Error: False turn!");
+        	return false;
+        }
         //Check wheter the move is legal
         if(board[from.x][from.y].checkMove(from, to, board)){
             //Attack
@@ -37,12 +41,12 @@ public class Versus extends Gamemode implements PieceProperties{
             if(turn == PieceProperties.Color.WHITE){
                 turn = PieceProperties.Color.BLACK;
             }else{
-        	turn = PieceProperties.Color.WHITE;
+            	turn = PieceProperties.Color.WHITE;
             }
 
         }else{
-                System.out.println("Error: Illegal move!");
+        	System.out.println("Error: Illegal move!");
         }
-            return false;
+        return false;
     }
 }

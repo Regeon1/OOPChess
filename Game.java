@@ -9,19 +9,16 @@ public class Game implements PieceProperties{
     
     public Game() {
         Scanner in = new Scanner(System.in);
-        Boolean flip = true;
-        draw(flip);
+        draw();
         while(true){
             String cmd = in.nextLine();
             String[] a = cmd.split(" ");
             if((a[0].equals("move") || a[0].equals("mv")) && a.length == 3){
                 g.movePiece(convertCMDcoordinates(a[1]), convertCMDcoordinates(a[2]));
-            }else if(a[0].equals("flip")){
-                flip = !flip;
             }else if(a[0].equals("exit")){
                 return;
             }
-            draw(flip);
+            draw();
         }
     }
     
@@ -33,12 +30,18 @@ public class Game implements PieceProperties{
         return new Vector2(((int)letter)-65, Integer.parseInt(cmd.substring(1))-1);
     }
     
-    public void draw(Boolean flip){
+    public void draw(){
+    	Boolean flip;
+    	if(g.getGameState().turn == Color.WHITE)
+    		flip = false;
+    	else
+    		flip=true;
+
         //Prepare information
         String [] info = new String[8];
         
         //Fix turn and lists when turn system is ready
-        info[0] = "  |Turn:" + flip;
+        info[0] = "  |Turn: " + (flip ? "Black": "White");
         info[1] = "  |You have captured:";
         info[2] = "  |" + (flip ? g.getGameState().lostBlack : g.getGameState().lostWhite);
         info[3] = "  |";
