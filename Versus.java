@@ -33,11 +33,13 @@ public class Versus extends Gamemode implements PieceProperties{
                 //Normal move below moves the king
             }
             //Promotion
-            if(board[from.x][from.y].getColor() == Color.WHITE && to.x == 1){
-            	promotion = new Vector2(to.x, to.y);
-            }
-            if(board[from.x][from.y].getColor() == Color.BLACK && to.x == 8){
-            	promotion = new Vector2(to.x, to.y);
+            if(board[from.x][from.y].getType() == Type.PAWN){
+               	if(board[from.x][from.y].getColor() == Color.WHITE && to.y == 7){
+            		promotion = new Vector2(to.x, to.y);
+            	}
+            	if(board[from.x][from.y].getColor() == Color.BLACK && to.y == 0){
+            		promotion = new Vector2(to.x, to.y);
+            	}
             }
 
             //Normal move
