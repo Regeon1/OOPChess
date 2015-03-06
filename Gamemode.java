@@ -48,11 +48,7 @@ public abstract class Gamemode implements PieceProperties{
         return new Gamestate(board.clone(), lostWhite, lostBlack, turn, promotion);
     }
     public void makePromotion(Vector2 to, Piece promoted){
-    	if(promoted.getType() == PieceProperties.Type.ROOK) board[to.x][to.y] = new Rook(turn); //turn is color
-    	if(promoted.getType() == PieceProperties.Type.KNIGHT) board[to.x][to.y] = new Knight(turn);
-    	if(promoted.getType() == PieceProperties.Type.BISHOP) board[to.x][to.y] = new Bishop(turn);
-    	if(promoted.getType() == PieceProperties.Type.QUEEN) board[to.x][to.y] = new Queen(turn);
-    	if(promoted.getType() == PieceProperties.Type.KING) board[to.x][to.y] = new King(turn);
+    	board[to.x][to.y] = promoted; 
     	promotion=null;
     }
 }

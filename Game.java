@@ -26,31 +26,33 @@ public class Game implements PieceProperties{
             if(g.getGameState().getPromotion() != null){
             	Vector2 to=g.getGameState().getPromotion();
             	System.out.println("What promotion? Set type.");
-            	String type = in.nextLine();
-            	
-            	if(type.equals("Rook")){
-            		Piece promotedPiece = new Rook(g.getGameState().getTurn());
-                	g.makePromotion(to, promotedPiece);
-            	}
-            	if(type.equals("Knight")){
-            		Piece promotedPiece = new Knight(g.getGameState().getTurn());
-                	g.makePromotion(to, promotedPiece);
-            	}
-            	if(type.equals("Bishop")){
-            		Piece promotedPiece = new Bishop(g.getGameState().getTurn());
-                	g.makePromotion(to, promotedPiece);
-            	}
-            	if(type.equals("Queen")){
-            		Piece promotedPiece = new Queen(g.getGameState().getTurn());
-                	g.makePromotion(to, promotedPiece);
-            	}
-            	if(type.equals("King")){
-            		Piece promotedPiece = new King(g.getGameState().getTurn());
-                	g.makePromotion(to, promotedPiece);
-            	}
-
+                System.out.println("Possible choices: rook, knight, bishop, queen");
+            	Color promotionColor = (g.getGameState().getTurn() == Color.BLACK) ? 
+                        Color.WHITE:Color.BLACK;
+                while(true){
+                    String type = in.nextLine();
+                    if(type.equals("rook")){
+                        Piece promotedPiece = new Rook(promotionColor);
+                        g.makePromotion(to, promotedPiece);
+                        break;
+                    }else if(type.equals("knight")){
+                        Piece promotedPiece = new Knight(promotionColor);
+                        g.makePromotion(to, promotedPiece);
+                        break;
+                    }else if(type.equals("bishop")){
+                        Piece promotedPiece = new Bishop(promotionColor);
+                        g.makePromotion(to, promotedPiece);
+                        break;
+                    }else if(type.equals("queen")){
+                        Piece promotedPiece = new Queen(promotionColor);
+                        g.makePromotion(to, promotedPiece);
+                        break;
+                    }else{
+                        System.out.println("Unknown piece, please try again.");
+                    }
+                }
+                
             }
-            
             draw();
         }
     }
