@@ -12,9 +12,10 @@ public abstract class Gamemode implements PieceProperties{
     protected ArrayList<Piece> lostBlack = new ArrayList<>();
     protected Color turn = Color.WHITE;
     protected Vector2 promotion;
+    protected Boolean check = false;
     
     public abstract Boolean movePiece(Vector2 from, Vector2 to)
-            throws IllegalMoveException, FalseTurnException;
+            throws IllegalMoveException, FalseTurnException, CheckException;
     
     public Gamemode(){
         //Initialize the board
@@ -45,10 +46,31 @@ public abstract class Gamemode implements PieceProperties{
     
     public Gamestate getGameState(){
         //Possible bug: Arraylists may be modified later, be careful...
-        return new Gamestate(board.clone(), lostWhite, lostBlack, turn, promotion);
+        return new Gamestate(board.clone(), lostWhite, lostBlack, turn, promotion, check);
     }
     public void makePromotion(Vector2 to, Piece promoted){
     	board[to.x][to.y] = promoted; 
     	promotion=null;
+    }
+    public Vector2 getKing(){
+    	for(int i=0; i<8; i++){
+         	for(int j=0; j<8; j++){
+         		if(getGameState().getBoard()[i][j].getType() == Type.KING){
+         			return new Vector2(i,j);
+         		}
+         	}
+    	}
+    	return new Vector2();//must return something
+    }
+    public void checkCheck(){
+    	 for(int i=0; i<8; i++){
+         	for(int j=0; j<8; j++){
+         		if(getGameState().getBoard()[i][j].getColor() != getGameState().getTurn()){
+         			if(getGameState().getBoard()[i][j].checkMove(new Vector2(i,j), getKing(), getGameState().getBoard()) ){	//kummin päin i ja j
+         				check=true;
+         			}
+         		}
+         	}
+         }    	   	
     }
 }

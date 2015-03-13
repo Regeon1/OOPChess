@@ -4,7 +4,7 @@
 public class Versus extends Gamemode implements PieceProperties{
     
     public Boolean movePiece(Vector2 from, Vector2 to) 
-            throws IllegalMoveException, FalseTurnException {
+            throws IllegalMoveException, FalseTurnException, CheckException {
 
     	//Check wheter the move is valid
         if(0 > from.x || from.x > 7 || 0 > from.y || from.y > 7 ||
@@ -14,6 +14,11 @@ public class Versus extends Gamemode implements PieceProperties{
         if(turn != board[from.x][from.y].getColor()){
         	throw(new FalseTurnException());
         }
+        //Check whether it's check 
+        if(getGameState().getCheck() && board[from.x][from.y].getType() != Type.KING){
+        	throw new CheckException();
+        }
+        
         //Check wheter the move is legal
         if(board[from.x][from.y].checkMove(from, to, board)){
             //Attack
