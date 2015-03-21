@@ -1,5 +1,3 @@
-Todo:
+Joel's todo:
 
--Add promotions
--Add function to Identify check and checkmate
--Add turns
+- Learn how to program :S

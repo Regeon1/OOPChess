@@ -19,15 +19,23 @@ public class Game implements PieceProperties{
                     System.out.println("Error: Illegal move!");
                 }catch(FalseTurnException ex){
                     System.out.println("Error: False turn!");
-                }catch(CheckException ex){
-                	System.out.println("Error: Check");
+                }catch(DrawException ex){
+                    System.out.println("It's a draw!");
+                    return;
+                }catch(CheckMateException ex){
+                    System.out.println((g.getGameState().getTurn() == Color.BLACK ? 
+                            "Black":"White") + " wins!");
                 }
+            }else if((a[0].equals("threat") || a[0].equals("th")) && a.length == 2){
+                System.out.println(g.isThreated(convertCMDcoordinates(a[1]), Color.WHITE));
             }else if(a[0].equals("exit")){
                 return;
             }
-            //if check
-            g.checkCheck();
-                       
+
+            if(g.getGameState().getCheck() == true){
+                System.out.println("Check!");
+                g.check = false;
+            }
             if(g.getGameState().getPromotion() != null){
             	Vector2 to=g.getGameState().getPromotion();
             	System.out.println("What promotion? Set type.");

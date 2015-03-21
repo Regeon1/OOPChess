@@ -4,7 +4,8 @@
 public class Versus extends Gamemode implements PieceProperties{
     
     public Boolean movePiece(Vector2 from, Vector2 to) 
-            throws IllegalMoveException, FalseTurnException, CheckException {
+            throws IllegalMoveException, FalseTurnException, 
+            CheckMateException, DrawException{
 
     	//Check wheter the move is valid
         if(0 > from.x || from.x > 7 || 0 > from.y || from.y > 7 ||
@@ -13,10 +14,6 @@ public class Versus extends Gamemode implements PieceProperties{
         
         if(turn != board[from.x][from.y].getColor()){
         	throw(new FalseTurnException());
-        }
-        //Check whether it's check 
-        if(getGameState().getCheck() && board[from.x][from.y].getType() != Type.KING){
-        	throw new CheckException();
         }
         
         //Check wheter the move is legal
@@ -50,6 +47,15 @@ public class Versus extends Gamemode implements PieceProperties{
             //Normal move
             board[to.x][to.y] = board[from.x][from.y];
             board[from.x][from.y] = new EmptyPiece();
+            
+            if(isCheck(turn) && isDraw(turn))
+                throw(new CheckMateException());
+
+            if(isDraw(turn))
+                //throw(new DrawException());
+
+            if(isCheck(turn))
+                check = true;
 
             //Changing turns
             if(turn == PieceProperties.Color.WHITE){
@@ -57,6 +63,7 @@ public class Versus extends Gamemode implements PieceProperties{
             }else{
             	turn = PieceProperties.Color.WHITE;
             }
+
 
         }else{
         	throw(new IllegalMoveException());

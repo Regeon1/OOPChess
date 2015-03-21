@@ -2,7 +2,6 @@
 //* modify it under the terms of the GNU General Public License 2
 
 
-import java.nio.channels.Pipe;
 import java.util.ArrayList;
 
 public abstract class Gamemode implements PieceProperties{
@@ -15,7 +14,8 @@ public abstract class Gamemode implements PieceProperties{
     protected Boolean check = false;
     
     public abstract Boolean movePiece(Vector2 from, Vector2 to)
-            throws IllegalMoveException, FalseTurnException, CheckException;
+            throws IllegalMoveException, FalseTurnException, 
+            CheckMateException, DrawException;
     
     public Gamemode(){
         //Initialize the board
@@ -52,25 +52,50 @@ public abstract class Gamemode implements PieceProperties{
     	board[to.x][to.y] = promoted; 
     	promotion=null;
     }
-    public Vector2 getKing(){
-    	for(int i=0; i<8; i++){
-         	for(int j=0; j<8; j++){
-         		if(getGameState().getBoard()[i][j].getType() == Type.KING){
-         			return new Vector2(i,j);
-         		}
-         	}
-    	}
-    	return new Vector2();//must return something
+
+    public Boolean isThreated(Vector2 coordinates, Color byWho){
+        for(int x = 0; x <= 7; x++){
+            for(int y = 0; y <= 7; y++){
+                if(board[x][y].getColor() == byWho){
+                    if(board[x][y].checkMove(new Vector2(x, y), coordinates, board)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
-    public void checkCheck(){
-    	 for(int i=0; i<8; i++){
-         	for(int j=0; j<8; j++){
-         		if(getGameState().getBoard()[i][j].getColor() != getGameState().getTurn()){
-         			if(getGameState().getBoard()[i][j].checkMove(new Vector2(i,j), getKing(), getGameState().getBoard()) ){	//kummin päin i ja j
-         				check=true;
-         			}
-         		}
-         	}
-         }    	   	
+    
+    public Boolean isCheck(Color byWho){
+        for(int x = 0; x <= 7; x++){
+            for(int y = 0; y <= 7; y++){
+                if(board[x][y].getType() == Type.KING && board[x][y].getColor() == 
+                        (byWho == Color.WHITE?Color.BLACK:Color.WHITE)){
+                    return isThreated(new Vector2(x, y), byWho);
+                }
+            }
+        }
+        return false;
+    }
+    
+    public Boolean isDraw(Color byWho){
+        for(int x = 0; x <= 7; x++){
+            for(int y = 0; y <= 7; y++){
+                if(board[x][y].getType() == Type.KING && board[x][y].getColor() == 
+                        (byWho == Color.WHITE?Color.BLACK:Color.WHITE)){
+                    Boolean draw = true;
+                    for(int a = (x > 0)?-1:0; a <= ((x < 7)?1:0); a++){
+                        for(int b = (y > 0)?-1:0; b <= ((y < 7)?1:0); b++){
+                            if((!isThreated(new Vector2(x+a, y+b), byWho) &&
+                                board[x+a][y+b].getType() == Type.EMPTY)&& 
+                                    (a != 0 && b != 0))
+                                draw = false;
+                        }
+                    }
+                    return draw;
+                }
+            }
+        }
+        return false; 
     }
 }
